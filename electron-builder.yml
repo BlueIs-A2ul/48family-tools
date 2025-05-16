@@ -3,6 +3,7 @@ productName: e-app
 directories:
   buildResources: build
 files:
+  - '!**/*.md'
   - '!**/.vscode/*'
   - '!src/*'
   - '!electron.vite.config.{js,ts,mjs,cjs}'
@@ -12,7 +13,7 @@ files:
 asarUnpack:
   - resources/**
 win:
-  executableName: e-app
+  executableName: 48Family-tools
 nsis:
   artifactName: ${name}-${version}-setup.${ext}
   shortcutName: ${productName}
