@@ -1,6 +1,7 @@
 <template>
   <div class="config-form">
     <div v-if="showError" class="error-tip">配置填写不完整</div>
+    <div v-if = "shouwSuccess" class = "success-tip">保存配置成功</div>
     <h2>账号配置</h2>
     <form @submit.prevent="handleSubmit">
       <div class="form-group">
@@ -26,6 +27,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 const showError = ref(false)
+const shouwSuccess = ref(false)
 const formData = ref({
   login: {
     username: '',
@@ -61,6 +63,10 @@ const handleSubmit = () => {
   try {
     //@ts-ignore
     window.inPutAPI.saveConfig(configToSave)
+    shouwSuccess.value = true
+    setTimeout(() => {
+      shouwSuccess.value = false
+    }, 3000)
   } catch (error) {
     console.error('保存配置失败:', error)
   }

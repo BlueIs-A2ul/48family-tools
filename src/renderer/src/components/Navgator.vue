@@ -3,7 +3,7 @@
     <RouterLink replace to="/Home" active-class="active">首页</RouterLink>
     <RouterLink replace to="/purchaseSeat" active-class="active">普座购买</RouterLink>
     <RouterLink replace to="/purchaseSpec" active-class="active">竞价购买</RouterLink>
-    <RouterLink replace to="/purchaseEP" active-class="active">EP购买</RouterLink>
+    <!-- <RouterLink replace to="/purchaseEP" active-class="active">EP购买</RouterLink> -->
     <RouterLink replace to="/write" active-class="active">账号配置</RouterLink>
     <RouterLink replace to="/peek" active-class="active">查看当前配置</RouterLink>
   </div>

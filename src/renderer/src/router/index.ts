@@ -1,24 +1,19 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 
 import Seat from '../pages/purchaseSeat.vue'
 import Spec from '../pages/purchaseSpec.vue'
 import Write from '../pages/Write.vue'
 import Home from '../pages/Home.vue'
 import Peek from '../pages/peek.vue'
-import Ep from '../pages/puchaseEP.vue'  
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes: [{
-    path: '/purchaseSeat',
+      path: '/purchaseSeat',
     component: Seat,
   },
   {
     path: '/purchaseSpec',
     component: Spec,
-  },
-  {
-    path: '/purchaseEP',
-    component: Ep,
   },
   {
     path: '/write',

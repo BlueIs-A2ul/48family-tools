@@ -1,12 +1,12 @@
-const findChromePath = require('chrome-finder');
+import findChromePath from 'chrome-finder';
+import type { InitChromiumEnv, GetChromePath } from './types/index.d.ts';
 
-async function initChromiumEnv() { 
+const initChromiumEnv: InitChromiumEnv = async () => {
     const chromePath = findChromePath();
     const {chromium} = await import('playwright');
     return { chromePath ,chromium };
 }
-
-async function getChromePath() {
+const getChromePath: GetChromePath = async () => {
     const { chromePath } = await initChromiumEnv();
     if(chromePath===null||chromePath===undefined){
         throw new Error('未找到chrome路径')

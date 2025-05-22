@@ -1,6 +1,7 @@
 <template>
   <div class="config-form">
     <div v-if="showError" class="error-tip">{{ errorMessage }}</div>
+    <div v-if="showSuccess" class = "success-tip">保存配置成功</div>
     <h2>普座购买</h2>
     <form @submit.prevent="handleSubmit">
         <div class="form-group">
@@ -10,7 +11,7 @@
         <div class="form-group">
           <label>演出组合</label>
           <select v-model="formData.selectedGroup">
-            <option v-for="(_value,key) in groupLink" :value="key"> {{ key }}</option>
+            <option v-for="(value,key) in group" :value="key"> {{ value }}</option>
           </select>
         </div>
         <div class="form-group">
@@ -24,54 +25,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref,Ref} from 'vue'
-import  { configInSeat } from '../types/index'
+import { usePurchaseGeneral } from '@renderer/hooks/usePurchaseGeneral';
+import { useAutomationRun } from '@renderer/hooks/useAutomationRun';
 
-const ticketType:Ref<string> = ref('GENERAL');
-
-const groupLink =  {
-    BEJ48: "a[href='?brand_id=2']",
-    GNZ48: "a[href='?brand_id=3']", 
-    CKG48: "a[href='?brand_id=5']",
-    CGT48: "a[href='?brand_id=15']"
-  }
-
-const showError:Ref<boolean> = ref(false);
-const errorMessage:Ref<string> = ref('');
-const formData: Ref<configInSeat> = ref({
-  regex: '',
-  targetTime: '',
-  selectedGroup: '',
-});
-//@ts-ignore
-window.inPutAPI.onAutomationError((err) => {
-  errorMessage.value = `运行失败：${err}`;
-  showError.value = true;
-  setTimeout(() => showError.value = false, 3000); // 3秒后自动隐藏
-});
-const handleSubmit = () => {
-  const configToSave = {
-    regex: formData.value.regex,
-    targetTime: formData.value.targetTime,
-    selectedGroup: formData.value.selectedGroup,
-  }
-  try {
-    //@ts-ignore
-    window.inPutAPI.saveConfig(configToSave);
-  } catch (error) {
-    console.error('保存配置失败:', error);
-  }
-}
-
-const startAutomation = async () => {
-  try {
-    //@ts-ignore
-    await window.inPutAPI.runAutomation(ticketType.value);
-  }
-  catch (error) {
-    throw error;
-  }
-};
+const { ticketType,showError,errorMessage,formData, handleSubmit,group,showSuccess} = usePurchaseGeneral();
+const { startAutomation } = useAutomationRun(ticketType);
 
 </script>
 

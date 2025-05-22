@@ -32,7 +32,8 @@ export default tseslint.config(
             lang: 'ts'
           }
         }
-      ]
+      ],
+      intent: ['error', 'tab', { tabWidth: 2 }]
     }
   },
   eslintConfigPrettier
